@@ -9,8 +9,8 @@ const initialState = {
   user:null,
 };
 
-export const createPostAction = createAsyncThunk(
-  'post/create',
+export const getPostsAction = createAsyncThunk(
+  'post/get',
   async (payload, { rejectWithValue }) => {
     try {
       const response = await http.post(http.setURL, payload);
@@ -20,8 +20,8 @@ export const createPostAction = createAsyncThunk(
     }
   }
 );
-export const editPostAction = createAsyncThunk(
-  'post/edit',
+export const getPostDetailAction = createAsyncThunk(
+  'post/get/detail',
   async (payload, { rejectWithValue }) => {
     try {
       const response = await http.post(http.setURL, payload);
@@ -39,31 +39,31 @@ const postSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createPostAction.pending, (state) => {
+      .addCase(getPostsAction.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(createPostAction.fulfilled, (state, action) => {
+      .addCase(getPostsAction.fulfilled, (state, action) => {
         state.loading = false;
         state.token = action.payload;
         // state.user = action.payload;
       })
-      .addCase(createPostAction.rejected, (state, action) => {
+      .addCase(getPostsAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
       // Edit
     builder
-      .addCase(editPostAction.pending, (state) => {
+      .addCase(getPostDetailAction.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(editPostAction.fulfilled, (state, action) => {
+      .addCase(getPostDetailAction.fulfilled, (state, action) => {
         state.loading = false;
         state.token = action.payload;
         // state.user = action.payload;
       })
-      .addCase(editPostAction.rejected, (state, action) => {
+      .addCase(getPostDetailAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
