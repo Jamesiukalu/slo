@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 import { useDispatch } from "react-redux";
-import { createPostAction } from "../../redux/actions/posts/postActions";
+import { createPostAction } from "../../redux/actions/posts/createPostActions";
 
 export const CreatePost = () => {
  const dispatch = useDispatch();
