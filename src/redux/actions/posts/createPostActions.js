@@ -33,7 +33,7 @@ export const editPostAction = createAsyncThunk(
 );
 
 
-const postSlice = createSlice({
+const createPostSlice = createSlice({
   name: 'post_create',
   initialState,
   reducers: {},
@@ -72,4 +72,4 @@ const postSlice = createSlice({
 
 
 
-export default postSlice.reducer;
+export default createPostSlice.reducer;
