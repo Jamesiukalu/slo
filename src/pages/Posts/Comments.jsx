@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { ScreenLoader } from "../commons/ScreenLoader";
 import { toast } from "react-toastify";
 import { formatDateTime, getSubString } from "../../services/helpers";
+import auth from "../../services/auth/authService";
 
 export const Comment = () => {
     const {id} = useParams()
@@ -35,9 +36,8 @@ export const Comment = () => {
      }
   };
 
-//   const successMessage = () => {
-//   }
 
+  const user = auth.getCurrentUser()
 
   useEffect(() => {
         dispatch(getCommentLstsAction(id))
@@ -50,6 +50,7 @@ export const Comment = () => {
               <div className="col-md-10 col-lg-10">
                 <h5>Comments</h5>
                 <hr />
+                
                 <form onSubmit={postComment}>
                     <div className="mb-3">
                         <textarea 
@@ -59,6 +60,7 @@ export const Comment = () => {
                         placeholder="Good services"
                         value={formData.comment}
                         onChange={handleInputChange}
+                        disabled = {!user? true: false}
                         name="comment"
                         />
                     </div>
@@ -67,8 +69,16 @@ export const Comment = () => {
                         {
                         error && <div className="alert alert-danger mb-2">{error?.message}</div>
                         }
-                        <button type="button" className="btn btn-sm btn-default outline-primaary">Cancel</button>
-                        <button className="btn btn-sm btn-primary">Post</button>
+                        {
+                            user ? 
+                            <>
+                            <button className="btn btn-sm btn-primary">Comment</button>
+                            </>
+                            :
+                            <a href="/login" className="btn btn-default btn-sm">
+                                Please login to comment
+                            </a>
+                        }
                     </div>
                 </form>
               </div>
@@ -94,7 +104,12 @@ export const Comment = () => {
                     
                   ))
                 : 
-                <p>No comment</p>
+                <div className="row mb-5">
+                    <div className="col-12">
+                        <p className="text-center">No comment</p>
+
+                    </div>
+                </div>
             }
         </>
     )

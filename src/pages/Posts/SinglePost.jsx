@@ -34,7 +34,7 @@ export const SinglePost = () => {
               <div className="col-sm-11 col-md-9 col-lg-10">
                   <div className="card border-0">
                       <div className="card-body">
-                          <img src= {logo} alt="Logo" style={{width:"100%"}} />
+                          <img src= {props?.data?.media} alt="Logo" style={{width:"100%"}} />
                       <div className="card-footer px-1 border-0 px-5">
                           <h6 className="mb-5">
                               {props?.data?.title}
@@ -73,32 +73,33 @@ export const SinglePost = () => {
           </div>
 
            {/* The three cards */}
-           <div className="row justify-content-center">
+           <div className="row justify-content-center  mt-5">
               <div className="col-md-10 col-lg-10">
+                <h6 className="ps-3">Related Stories</h6>
               <div className="row">
                     <div className="col-sm-11 col-md-9 col-lg-4">
                         <div className="card border-0">
                             <div className="card-body">
-                                <img src= {logo} alt="Logo" style={{width:"100%"}} />
+                                <img src= {posts?.data[2]?.media} alt="Logo" style={{width:"100%"}} />
                             <div className="card-footer px-1 border-0">
                                 <small className="btn btn-sm btn-secondary">
-                                    {posts?.data[0]?.category}
+                                    {posts?.data[2]?.category}
                                 </small>
                                 <article>
                                     <h6>
-                                        {getSubString( posts?.data[0]?.title,15)}
+                                        {getSubString( posts?.data[2]?.title,15)}
                                     </h6>
                                     <p>
-                                        {getSubString(posts?.data[0]?.body,20)}
+                                        {getSubString(posts?.data[2]?.body,20)}
                                     </p>
 
                                 </article>
                                 <div className="d-flex justify-content-between px-1">
                                     <small>
-                                        {formatDateTime( posts?.data[0]?.created_on)}
+                                        {formatDateTime( posts?.data[2]?.created_on)}
                                     </small>
                                     <small>
-                                        <a href={`/post/details/${posts?.data[0]?.id}`}>Read More </a>
+                                        <a href={`/post/details/${posts?.data[2]?.id}`}>Read More </a>
                                     </small>
                                 </div>
                             </div>
@@ -109,26 +110,26 @@ export const SinglePost = () => {
                     <div className="col-sm-11 col-md-9 col-lg-4">
                         <div className="card border-0">
                             <div className="card-body">
-                                <img src= {logo} alt="Logo" style={{width:"100%"}} />
+                                <img src= {posts?.data[1]?.media} alt="Logo" style={{width:"100%"}} />
                             <div className="card-footer px-1 border-0">
                                 <small className="btn btn-sm btn-secondary">
                                     {posts?.data[0]?.category}
                                 </small>
                                 <article>
                                     <h6>
-                                        {getSubString( posts?.data[0]?.title,15)}
+                                        {getSubString( posts?.data[1]?.title,15)}
                                     </h6>
                                     <p>
-                                        {getSubString(posts?.data[0]?.body,20)}
+                                        {getSubString(posts?.data[1]?.body,20)}
                                     </p>
 
                                 </article>
                                 <div className="d-flex justify-content-between px-1">
                                     <small>
-                                        {formatDateTime( posts?.data[0]?.created_on)}
+                                        {formatDateTime( posts?.data[1]?.created_on)}
                                     </small>
                                     <small>
-                                        <a href={`/post/details/${posts?.data[0]?.id}`}>Read More </a>
+                                        <a href={`/post/details/${posts?.data[1]?.id}`}>Read More </a>
                                     </small>
                                 </div>
                             </div>
@@ -139,26 +140,26 @@ export const SinglePost = () => {
                     <div className="col-sm-11 col-md-9 col-lg-4">
                         <div className="card border-0">
                             <div className="card-body">
-                                <img src= {logo} alt="Logo" style={{width:"100%"}} />
+                                <img src= {posts?.data[3]?.media} alt="Logo" style={{width:"100%"}} />
                             <div className="card-footer px-1 border-0">
                                 <small className="btn btn-sm btn-secondary">
-                                    {posts?.data[0]?.category}
+                                    {posts?.data[3]?.category}
                                 </small>
                                 <article>
                                     <h6>
-                                        {getSubString( posts?.data[0]?.title,15)}
+                                        {getSubString( posts?.data[3]?.title,15)}
                                     </h6>
                                     <p>
-                                        {getSubString(posts?.data[0]?.body,20)}
+                                        {getSubString(posts?.data[3]?.body,20)}
                                     </p>
 
                                 </article>
                                 <div className="d-flex justify-content-between px-1">
                                     <small>
-                                        {formatDateTime( posts?.data[0]?.created_on)}
+                                        {formatDateTime( posts?.data[3]?.created_on)}
                                     </small>
                                     <small>
-                                        <a href={`/post/details/${posts?.data[0]?.id}`}>Read More </a>
+                                        <a href={`/post/details/${posts?.data[3]?.id}`}>Read More </a>
                                     </small>
                                 </div>
                             </div>

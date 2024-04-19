@@ -1,7 +1,7 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import { useDispatch,useSelector } from "react-redux";
 import { updatePasswordAction } from "../redux/actions/auth/updatePasswordAction";
-import { useNavigate,Navigate } from 'react-router-dom';
+import { useNavigate,Navigate , useLocation} from 'react-router-dom';
 import auth from "../services/auth/authService";
 import { ScreenLoader } from "./commons/ScreenLoader";
 
@@ -13,9 +13,11 @@ export const ResetPassword = () => {
  const statusCode = useSelector(state => state.update_password.statusCode);
  const loading = useSelector(state => state.update_password.loading);
 
-
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('token');
+  console.log(token)
  const [formData, setFormData] = useState({
-    token: '',
     password: '',
     password_confirmation:''
   })
@@ -40,14 +42,20 @@ export const ResetPassword = () => {
     }else{
       setInvalidPassord(false)
       setInvalidPassordError("")
-      await dispatch(updatePasswordAction({ ...formData }));
-      
-      if(statusCode >= 200 && statusCode <=299){
-          console.log(statusCode)
-          navigation('/login')
-        }
-      }
+      await dispatch(updatePasswordAction({ ...formData, token:token }));
+    }
   };
+
+  const navigateToNextPage = () => {
+    if(statusCode >= 200 && statusCode <=299){
+      toast.success("Password updated successfull", {autoClose:300})
+      navigation('/login')    }
+  }
+
+  
+  useEffect(()=>{
+     navigateToNextPage()
+  }, [statusCode])
 
   if (auth.getCurrentUser()) { return <Navigate to='/' /> }
 
@@ -72,18 +80,6 @@ export const ResetPassword = () => {
               </div>
 
               <form onSubmit={register}>
-                <div className="mb-3">
-                  <label htmlFor="token" className="form-label">token</label>
-                  <input 
-                   type="text" 
-                   name="token" 
-                   className="form-control"
-                   id="token" 
-                    placeholder="89894"
-                    value={formData.token}
-                    onChange={handleInputChange}
-                   />
-                </div>
 
                 <div className="mb-3">
                   <label htmlFor="password" className="form-label">Password</label>
@@ -117,7 +113,7 @@ export const ResetPassword = () => {
                   {
                     error && <div className="alert alert-danger mb-2">{error?.message}</div>
                   }
-                <button  className="form-control btn btn-primary">Rgister</button>
+                <button  className="form-control btn btn-primary">Reset</button>
                 </div>
               </form>
 

@@ -1,8 +1,10 @@
-import React, {useEffect,useState} from "react"
+import React, {useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { formatDateTime } from "../../services/helpers";
+import { formatDateTime, getSubString } from "../../services/helpers";
 import {getPostDataAction} from "../../redux/actions/posts/postDataActions";
+import {deletePostAction} from "../../redux/actions/posts/deletePostActions";
 import { ScreenLoader } from "../commons/ScreenLoader";
+import { toast } from "react-toastify";
 
 export const Posts = () => {
 
@@ -10,15 +12,31 @@ export const Posts = () => {
 
  const loading = useSelector(state => state.post_data.loading);
  const postData = useSelector(state => state.post_data.data);
+ const statusCode = useSelector(state => state.post_delete.statusCode);
+ const deletePostLoading = useSelector(state => state.post_delete.loading);
 
-  useEffect(() => {
+ const deletePost =(id) => {
+    dispatch(deletePostAction(id))
+ }
+
+ const navigateToNextPage = () => {
+  if(statusCode && statusCode >=200 && statusCode <= 299){
+    toast.success("post deleted successfull", {autoClose:300})
+    window.location.reload()
+  }
+}
+
+
+useEffect(() => {
      dispatch(getPostDataAction({}))
-  }, []);
-  
+     navigateToNextPage
+  }, [statusCode]);
+
 
   return (
         <>
-         <ScreenLoader status={loading}/>
+        
+         <ScreenLoader status={deletePostLoading}/>
           <div className="posts-wrapper">
             <div className="container p-4">
                <div className="d-flex justify-content-between mb-2">
@@ -40,14 +58,14 @@ export const Posts = () => {
                     postData ?  
                     postData?.data?.map((data) => (
                     <tr key={data?.title} className="text-center">
-                      <td >{data?.title}</td>
+                      <td >{getSubString( data?.title,15)}</td>
                       <td>{data?.creator?.name}</td>
                       <td>{formatDateTime(data?.created_on)}</td>
                       <td>
                         <a href = {`post/edit/${data?.id}`}  className="btn btn-sm btn-primary me-4">
                           Edit
                         </a>
-                        <button className="btn btn-sm btn-danger">
+                        <button onClick={()=> deletePost(data?.id)} className="btn btn-sm btn-danger">
                           Delete
                         </button>
                       </td>

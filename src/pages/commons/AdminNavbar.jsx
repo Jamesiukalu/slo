@@ -52,15 +52,15 @@ export const AdminNavbar  = () => {
           {/* <div className="d-flex justify-content-between"> */}
              <ul className="d-flex justify-content-evenly">
                 <li className="nav-item">
-                    <a href="/" className="nav-link">
+                    <a href="/" className="btn-primary btn-sm">
                         Home
                     </a>
                 </li>
                 <li className="nav-item">
-                    <a href="/users" className="nav-link">User Management</a>
+                    <a href="/users" className=" btn-primary btn-sm">User Management</a>
                 </li>
                 <li className="nav-item">
-                    <a href="/blogs" className="nav-link">Blogs Management</a>
+                    <a href="/blogs" className="  btn-sm btn-primary">Blogs Management</a>
                 </li>
              </ul>
           {/* </div> */}

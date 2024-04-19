@@ -13,7 +13,7 @@ export const Navbar  = () => {
     return (
         <>
             {
-                (user || userData) && (user?.user_type === ADMIN || userData.user_type === ADMIN)  ? 
+                (user || userData) && (user?.user_type === ADMIN || userData?.user_type === ADMIN)  ? 
                <AdminNavbar/>
                :
                <UserNavbar/>

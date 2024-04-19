@@ -1,8 +1,9 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import { useDispatch,useSelector } from "react-redux";
 import { resetPasswordEmailAction } from "../redux/actions/auth/resetPasswordEmailAction";
 import { useNavigate } from 'react-router-dom';
 import { ScreenLoader } from "./commons/ScreenLoader";
+import { toast } from "react-toastify";
 
 
 export const SendForgotPasswordEmail = () => {
@@ -31,11 +32,18 @@ export const SendForgotPasswordEmail = () => {
     const resetPassword = async (e) => {
         e.preventDefault();
         await dispatch(resetPasswordEmailAction({ ...formData }));
-
-        if(statusCode >= 200 && statusCode <=299){
-          navigation('/reset-password')
-        }
   };
+
+  const navigateToNextPage = () => {
+    if(statusCode >= 200 && statusCode <=299){
+      toast.success("Verification successfull", {autoClose:300})
+      navigation('/reset-password?token=849348938')    }
+  }
+
+  
+  useEffect(()=>{
+     navigateToNextPage()
+  }, [statusCode])
 
   return (
       <div>
@@ -79,7 +87,7 @@ export const SendForgotPasswordEmail = () => {
                     error && <div className="alert alert-danger mb-2">{error?.message}</div>
                   }
 
-                <button  className="form-control btn btn-primary">Verify</button>
+                <button  className="form-control btn btn-primary">Send Email</button>
                 </div>
               </form>
 

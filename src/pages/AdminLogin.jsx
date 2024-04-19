@@ -91,7 +91,7 @@ export const AdminLogin = () => {
                 </div>
 
                 <div className="mb-3">
-                <label htmlFor="passowrd" className="form-label">Example textarea</label>
+                <label htmlFor="passowrd" className="form-label">Password</label>
                 <input 
                  type="password" 
                  onChange={handleInputChange} 

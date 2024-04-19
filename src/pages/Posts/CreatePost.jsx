@@ -107,7 +107,7 @@ export const CreatePost = () => {
                    type="file" 
                    name="media" 
                    className="form-control"
-               
+                   required
                     // value={formData.media}
                     onChange={handleFileChange}
                    />
@@ -131,38 +131,42 @@ export const CreatePost = () => {
                     placeholder="Investments"
                     value={formData.title}
                     onChange={handleInputChange}
+                    required
                    />
                 </div>
 
                 <div className="mb-3">
                   <label htmlFor="category" className="form-label">Category</label>
-                  <select 
-                   name="category" 
-                   className="form-control"
-                   id="category" 
-                    placeholder="Investments"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                   >
-                     <option value="">select category</option>
-                     {
+                  <select
+                      name="category"
+                      className="form-control"
+                      id="cat"
+                      value={formData.category}
+                      onChange={handleInputChange}
+                      required
+                    >
+                      <option value="">Select category</option>
+                      {
                         categories.map(category => (
                           <option key={category} value={category}>{category}</option>
                         ))
                       }
-                   </select>
+                    </select>
                 </div>
+
+                
 
                 <div className="mb-3">
                   <label htmlFor="body" className="form-label">Body</label>
                   <textarea 
-                   
+                   rows={6}
                   className="form-control" 
                   id="body" 
                   placeholder="Good services"
                    value={formData.body}
                    onChange={handleInputChange}
                    name="body"
+                   required
                   />
                 </div>
 

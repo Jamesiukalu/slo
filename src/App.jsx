@@ -18,6 +18,9 @@ import { Users } from './pages/UserManagement/Users'
 import { EditUser } from './pages/UserManagement/EditUsers'
 import { SendForgotPasswordEmail } from './pages/SendForgotPasswordEmail'
 import { ResetPassword } from './pages/ResetPassword'
+import NotAuthorized from './pages/NotAuthorized'
+import { ProtectedRoute } from './pages/ProtectedRoute'
+import { AdminProtectedRoute } from './pages/AdminProtectedRoute'
 
 function App() {
   
@@ -30,17 +33,28 @@ function App() {
             <Route path='/' element={<Home/>} />
             <Route path='/login' element={<AdminLogin/>} />
             <Route path='/logout' element={<Logout/>} />
-            <Route path='/create/post' element={<CreatePost/>} />
-            <Route path='/create/users' element={<CreateUsers/>} />
-            <Route path='/users' element={<Users/>} />
-            <Route path='/user/edit/:id' element={<EditUser/>} />
-            <Route path='/post/edit/:id' element={<EditPost/>} />
-            <Route path='/post/details/:id' element={<SinglePost/>} />
-            <Route path='/blogs' element={<Posts/>} />
+
+            <Route path="/" element={<ProtectedRoute />}>
+              
+              {/* Admin Protected Routes */}
+              <Route path="/" element={<AdminProtectedRoute />}>
+                  <Route path='/create/post' element={<CreatePost/>} />
+                  <Route path='/create/users' element={<CreateUsers/>} />
+                  <Route path='/users' element={<Users/>} />
+                  <Route path='/user/edit/:id' element={<EditUser/>} />
+                  <Route path='/post/edit/:id' element={<EditPost/>} />
+                  <Route path='/post/details/:id' element={<SinglePost/>} />
+                  <Route path='/blogs' element={<Posts/>} />
+              </Route>
+            </Route>
+            
+           
             <Route path='/register' element={<Register/>} />
             <Route path='/verify/email-otp' element={<VerifyEmail/>} />
             <Route path='/forgot-password' element={<SendForgotPasswordEmail/>} />
             <Route path='/reset-password' element={<ResetPassword/>} />
+            <Route path="/not-allowed" element={<NotAuthorized />} />
+
           </Routes>
         </Router>
         <Footer/>

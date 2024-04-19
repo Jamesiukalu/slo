@@ -149,7 +149,7 @@ export const Register = () => {
                   {
                     error && <div className="alert alert-danger mb-2">{error?.message}</div>
                   }
-                <button  className="form-control btn btn-primary">Rgister</button>
+                <button  className="form-control btn btn-primary">Sign Up</button>
                 </div>
               </form>
 

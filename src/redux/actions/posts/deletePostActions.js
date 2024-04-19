@@ -7,23 +7,19 @@ const initialState = {
   error: null,
   data:null,
   statusCode:null,
-  updateStatusCode: null,
 };
 
 
-
-
-export const updateUserAction = createAsyncThunk(
-  'users/edit/update',
-  async (payload, { rejectWithValue }) => {
+export const deletePostAction = createAsyncThunk(
+  'post/delete/action',
+  async (id, { rejectWithValue }) => {
 
     try {
-      const response = await http.instance.patch(`users/${payload.id}`, payload.data
-    );
+      const response = await http.instance.delete(`posts/${id}`);
      
       return {
         data: response.data,
-        updateStatusCode: response.status, // Status code from the HTTP response
+        statusCode: response.status, // Status code from the HTTP response
       };
 
     } catch (error) {
@@ -33,28 +29,30 @@ export const updateUserAction = createAsyncThunk(
 );
 
 
-const updateUserSlice = createSlice({
-  name: 'user_update',
+const deletePostSlice = createSlice({
+  name: 'post_delete',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+   
     builder
-      .addCase(updateUserAction.pending, (state) => {
+      .addCase(deletePostAction.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(updateUserAction.fulfilled, (state, action) => {
+      .addCase(deletePostAction.fulfilled, (state, action) => {
         state.data = action.payload.data;
-        state.updateStatusCode = action.payload.updateStatusCode;
+        state.statusCode = action.payload.statusCode;
         state.loading = false;
       })
-      .addCase(updateUserAction.rejected, (state, action) => {
+      .addCase(deletePostAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
+
   },
 });
 
 
 
-export default updateUserSlice.reducer;
+export default deletePostSlice.reducer;

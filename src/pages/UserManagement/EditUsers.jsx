@@ -13,6 +13,7 @@ export const EditUser = () => {
  const dispatch = useDispatch();
  const error = useSelector(state => state.user_update.error);
  const statusCode = useSelector(state => state.user_details.statusCode);
+ const updateStatusCode = useSelector(state => state.user_update.updateStatusCode);
  const loading = useSelector(state => state.user_update.loading);
  const userData = useSelector(state => state.user_details.data);
  const navigation = useNavigate()
@@ -21,7 +22,7 @@ export const EditUser = () => {
 const [formData, setFormData] = useState({
     name: "",
     email: "",
-    user_type: ''
+    user_type: 'Admin'
   });
 
   
@@ -39,10 +40,10 @@ const [formData, setFormData] = useState({
       dispatch(updateUserAction({data:{...formData},id}));
   };
 
-  const successMessage = () => {
-    if(statusCode && statusCode ===201){
-      toast.success("Post updated", {autoClose:200})
-       navigation('/blogs')
+  const navigateToNextPage = () => {
+    if(updateStatusCode >= 200 && updateStatusCode <=299){
+      toast.success("Users updated successfull", {autoClose:300})
+      navigation('/users')
     }
   }
   
@@ -56,11 +57,11 @@ const [formData, setFormData] = useState({
       setFormData({
         name: userData.data.name || "",
         email: userData.data.email || "",
-        user_type: userData.data.user_type || ''
+        user_type:'Admin'
       });
     }
-    successMessage()
-  }, [userData, dispatch, id, statusCode]);
+    navigateToNextPage()
+  }, [userData, dispatch, id, statusCode, updateStatusCode]);
 
   return (
     <div>
@@ -96,28 +97,13 @@ const [formData, setFormData] = useState({
                 onChange={handleInputChange}
                 />
               </div>
-
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">User type</label>
-                <select 
-               
-                className="form-control" 
-                name="user_type"
-                value={formData.user_type}
-                onChange={handleInputChange}
-                >
-                  <option value="">select</option>
-                  <option value="Admin">Admin</option>
-                  <option value="Visitor">Visitor</option>
-                </select>
-              </div>
              
               <div className="mb-3">
                 
                 {
                   error && <div className="alert alert-danger mb-2">{error?.message}</div>
                 }
-              <button  className="form-control btn btn-primary">Rgister</button>
+              <button  className="form-control btn btn-primary">Update</button>
               </div>
             </form>
 

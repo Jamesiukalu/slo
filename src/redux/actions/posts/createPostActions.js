@@ -6,7 +6,7 @@ const initialState = {
   loading: false,
   error: null,
   data:null,
-  statusCode:null
+  statusCode:null,
 };
 
 export const createPostAction = createAsyncThunk(
@@ -36,7 +36,7 @@ export const editPostAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
 
     try {
-      const response = await http.instance.patch(`posts/${payload.id}`, payload.data,
+      const response = await http.instance.patch(`posts/${payload.id}?_method=PUT`, payload.data,
       {
         headers:{
           'Content-Type': 'multipart/form-data',
@@ -90,6 +90,7 @@ const createPostSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       });
+
   },
 });
 

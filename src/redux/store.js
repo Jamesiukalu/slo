@@ -12,6 +12,7 @@ import updateUserSlice from './actions/users/updateUserAction'
 import verifyEmailSlice from './actions/auth/verifyEmailAction'
 import resetPasswordEmailSlice from './actions/auth/resetPasswordEmailAction'
 import updatePasswordSlice from './actions/auth/updatePasswordAction'
+import deletePostSlice from './actions/posts/deletePostActions'
 
 const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ const store = configureStore({
     user_update: updateUserSlice,
     reset_password: resetPasswordEmailSlice,
     update_password: updatePasswordSlice,
+    post_delete: deletePostSlice,
   },
 });
 
