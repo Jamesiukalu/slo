@@ -1,22 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import http from "../../../services/http/httpService";
-import auth from "../../../services/auth/authService";
 
 
 const initialState = {
   loading: false,
   error: null,
   data:null,
-  statusCode:null
+  statusCode:null,
 };
 
-
-
-export const getPostDetailAction = createAsyncThunk(
-  'post/get/detail',
+export const getCommentLstsAction = createAsyncThunk(
+  'comment/lists',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await http.get(`${http.setURL}posts/${id}`);
+      const response = await http.instance.get( `posts/${id}/comments`
+    );
       return {
         data: response.data,
         statusCode: response.status, // Status code from the HTTP response
@@ -28,29 +26,30 @@ export const getPostDetailAction = createAsyncThunk(
 );
 
 
-const postSlice = createSlice({
-  name: 'posts',
+
+const CommentListsSlice = createSlice({
+  name: 'comments_lists',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-  
     builder
-      .addCase(getPostDetailAction.pending, (state) => {
+      .addCase(getCommentLstsAction.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getPostDetailAction.fulfilled, (state, action) => {
-        state.loading = false;
+      .addCase(getCommentLstsAction.fulfilled, (state, action) => {
         state.data = action.payload.data;
-        // state.user = action.payload;
+        state.createStatusCode = action.payload.createStatusCode;
+        state.loading = false;
       })
-      .addCase(getPostDetailAction.rejected, (state, action) => {
+      .addCase(getCommentLstsAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
+     
   },
 });
 
 
 
-export default postSlice.reducer;
+export default CommentListsSlice.reducer;

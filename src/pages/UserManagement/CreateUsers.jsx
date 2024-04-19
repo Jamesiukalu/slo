@@ -1,14 +1,12 @@
-import React, {useState,useEffect} from "react"
+import React, {useState} from "react"
 import { useDispatch,useSelector } from "react-redux";
-import { registerAction } from "../redux/actions/auth/registerAction";
-import { useNavigate,Navigate } from 'react-router-dom';
-import auth from "../services/auth/authService";
-import { ScreenLoader } from "./commons/ScreenLoader";
-import { toast } from "react-toastify";
+import { registerAction } from "../../redux/actions/auth/registerAction";
+import { useNavigate } from 'react-router-dom';
+import { ScreenLoader } from "../commons/ScreenLoader";
 
 
 
-export const Register = () => {
+export const CreateUsers = () => {
  const dispatch = useDispatch();
  const navigation = useNavigate()
  const error = useSelector(state => state.register.error);
@@ -20,7 +18,7 @@ export const Register = () => {
     email: '',
     password: '',
     name:'',
-    user_type:'Visitor',
+    user_type:'',
     password_confirmation:''
   })
   const [invalidPassord, setInvalidPassord] = useState(false)
@@ -47,25 +45,11 @@ export const Register = () => {
       await dispatch(registerAction({ ...formData }));
       
       if(statusCode >= 200 && statusCode <=299){
-         
-          navigation('/verify/email-otp')
+          navigation('/users')
         }
       }
   };
 
-  const navigateToNextPage = () => {
-    if(statusCode && statusCode ===201){
-      toast.success("Registration successfull", {autoClose:300})
-      navigation('/verify/email-otp')
-    }
-  }
-
-  
-  useEffect(()=>{
-     navigateToNextPage()
-  }, [statusCode])
-
-  if (auth.getCurrentUser()) { return <Navigate to='/' /> }
 
   return (
       <div>
@@ -75,21 +59,6 @@ export const Register = () => {
           <div className="col-sm-8 col-md-6 col-lg-4">
              <div className="card border-0">
               <div className="card-body">
-              <div>
-                   
-                   <div className="row justify-content-center">
-                      <div className="col">
-                       <h3 className="text-center">
-                        Sign Up
-                      </h3>
-                      <p className="text-center text-muted">
-                        Fill in your credentials below to get started 😎
-                      </p>
-                      </div>
-                     
-                   </div>
-              </div>
-
               <form onSubmit={register}>
                 <div className="mb-3">
                   <label htmlFor="fullname" className="form-label">Fullname</label>
@@ -115,6 +84,21 @@ export const Register = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   />
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">User type</label>
+                  <select 
+                 
+                  className="form-control" 
+                  name="user_type"
+                  value={formData.user_type}
+                  onChange={handleInputChange}
+                  >
+                    <option value="">select</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Visitor">Visitor</option>
+                  </select>
                 </div>
 
                 <div className="mb-3">

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import http from "../../../services/http/httpService";
-import auth from "../../../services/auth/authService";
 
 
 const initialState = {
@@ -12,15 +11,20 @@ const initialState = {
 
 
 
-export const getPostDetailAction = createAsyncThunk(
-  'post/get/detail',
-  async (id, { rejectWithValue }) => {
+
+export const updateUserAction = createAsyncThunk(
+  'users/edit/update',
+  async (payload, { rejectWithValue }) => {
+
     try {
-      const response = await http.get(`${http.setURL}posts/${id}`);
+      const response = await http.instance.patch(`users/${payload.id}`, payload.data
+    );
+     
       return {
         data: response.data,
         statusCode: response.status, // Status code from the HTTP response
       };
+
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -28,23 +32,22 @@ export const getPostDetailAction = createAsyncThunk(
 );
 
 
-const postSlice = createSlice({
-  name: 'posts',
+const updateUserSlice = createSlice({
+  name: 'user_update',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-  
     builder
-      .addCase(getPostDetailAction.pending, (state) => {
+      .addCase(updateUserAction.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getPostDetailAction.fulfilled, (state, action) => {
-        state.loading = false;
+      .addCase(updateUserAction.fulfilled, (state, action) => {
         state.data = action.payload.data;
-        // state.user = action.payload;
+        state.statusCode = action.payload.statusCode;
+        state.loading = false;
       })
-      .addCase(getPostDetailAction.rejected, (state, action) => {
+      .addCase(updateUserAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
@@ -53,4 +56,4 @@ const postSlice = createSlice({
 
 
 
-export default postSlice.reducer;
+export default updateUserSlice.reducer;

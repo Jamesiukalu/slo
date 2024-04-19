@@ -39,13 +39,14 @@ const instance = axios.create({
   headers: {
       'content-type':'application/json',
       "Accept":"application/json",
-      Authorization: auth.getJWT()
+      Authorization: `Bearer ${auth.getJWT()}`
   },
 });
 const http  = {
   get: axios.get,
   post: axios.post,
   put: axios.put,
+  patch: axios.patch,
   delete: axios.delete,
   setJwtHeaders,
   setURL:setURL(),

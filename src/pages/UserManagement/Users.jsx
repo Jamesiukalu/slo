@@ -1,18 +1,18 @@
 import React, {useEffect,useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { formatDateTime } from "../../services/helpers";
-import {getPostDataAction} from "../../redux/actions/posts/postDataActions";
+import {getUserDataAction} from "../../redux/actions/users/userDataActions";
 import { ScreenLoader } from "../commons/ScreenLoader";
 
-export const Posts = () => {
+export const Users = () => {
 
  const dispatch = useDispatch();
 
- const loading = useSelector(state => state.post_data.loading);
- const postData = useSelector(state => state.post_data.data);
+ const loading = useSelector(state => state.user_data.loading);
+ const userData = useSelector(state => state.user_data.data);
 
   useEffect(() => {
-     dispatch(getPostDataAction({}))
+     dispatch(getUserDataAction({}))
   }, []);
   
 
@@ -23,33 +23,28 @@ export const Posts = () => {
             <div className="container p-4">
                <div className="d-flex justify-content-between mb-2">
                  <h5>Blog Post</h5>
-                 <a href="/create/post" className="btn btn-sm btn-primary">+Add New Post</a>
+                 <a href="/create/users" className="btn btn-sm btn-primary">+Add New Users</a>
                </div>
             <div className="table-responsive">
             <table className="table">
                 <thead>
-                  <tr className="text-center">
-                    <th scope="col">Title</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Date Posted</th>
-                    <th scope="col">Action</th>
+                  <tr className="">
+                    <th scope="col" className="text-start">Name</th>
+                    <th scope="col" className="text-center">Role</th>
+                    <th scope="col" className="text-end">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {
-                    postData ?  
-                    postData?.data?.map((data) => (
-                    <tr key={data?.title} className="text-center">
-                      <td >{data?.title}</td>
-                      <td>{data?.creator?.name}</td>
-                      <td>{formatDateTime(data?.created_on)}</td>
-                      <td>
-                        <a href = {`post/edit/${data?.id}`}  className="btn btn-sm btn-primary me-4">
+                    userData ?  
+                    userData?.data?.map((data) => (
+                    <tr key={data?.email} className="text-">
+                      <td className="text-start" >{data?.name}</td>
+                      <td className="text-center">{data?.user_type}</td>
+                      <td className="text-end">
+                        <a href = {`user/edit/${data?.id}`}  className="btn btn-sm btn-primary me-4">
                           Edit
                         </a>
-                        <button className="btn btn-sm btn-danger">
-                          Delete
-                        </button>
                       </td>
                     </tr>
                     

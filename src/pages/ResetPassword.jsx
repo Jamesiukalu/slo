@@ -1,26 +1,22 @@
-import React, {useState,useEffect} from "react"
+import React, {useState} from "react"
 import { useDispatch,useSelector } from "react-redux";
-import { registerAction } from "../redux/actions/auth/registerAction";
+import { updatePasswordAction } from "../redux/actions/auth/updatePasswordAction";
 import { useNavigate,Navigate } from 'react-router-dom';
 import auth from "../services/auth/authService";
 import { ScreenLoader } from "./commons/ScreenLoader";
-import { toast } from "react-toastify";
 
 
-
-export const Register = () => {
+export const ResetPassword = () => {
  const dispatch = useDispatch();
  const navigation = useNavigate()
- const error = useSelector(state => state.register.error);
- const statusCode = useSelector(state => state.register.statusCode);
- const loading = useSelector(state => state.register.loading);
+ const error = useSelector(state => state.update_password.error);
+ const statusCode = useSelector(state => state.update_password.statusCode);
+ const loading = useSelector(state => state.update_password.loading);
 
 
  const [formData, setFormData] = useState({
-    email: '',
+    token: '',
     password: '',
-    name:'',
-    user_type:'Visitor',
     password_confirmation:''
   })
   const [invalidPassord, setInvalidPassord] = useState(false)
@@ -44,26 +40,14 @@ export const Register = () => {
     }else{
       setInvalidPassord(false)
       setInvalidPassordError("")
-      await dispatch(registerAction({ ...formData }));
+      await dispatch(updatePasswordAction({ ...formData }));
       
       if(statusCode >= 200 && statusCode <=299){
-         
-          navigation('/verify/email-otp')
+          console.log(statusCode)
+          navigation('/login')
         }
       }
   };
-
-  const navigateToNextPage = () => {
-    if(statusCode && statusCode ===201){
-      toast.success("Registration successfull", {autoClose:300})
-      navigation('/verify/email-otp')
-    }
-  }
-
-  
-  useEffect(()=>{
-     navigateToNextPage()
-  }, [statusCode])
 
   if (auth.getCurrentUser()) { return <Navigate to='/' /> }
 
@@ -80,11 +64,8 @@ export const Register = () => {
                    <div className="row justify-content-center">
                       <div className="col">
                        <h3 className="text-center">
-                        Sign Up
+                         Reset Password
                       </h3>
-                      <p className="text-center text-muted">
-                        Fill in your credentials below to get started 😎
-                      </p>
                       </div>
                      
                    </div>
@@ -92,29 +73,16 @@ export const Register = () => {
 
               <form onSubmit={register}>
                 <div className="mb-3">
-                  <label htmlFor="fullname" className="form-label">Fullname</label>
+                  <label htmlFor="token" className="form-label">token</label>
                   <input 
                    type="text" 
-                   name="name" 
+                   name="token" 
                    className="form-control"
-                   id="fullname" 
-                    placeholder="John Doe"
-                    value={formData.name}
+                   id="token" 
+                    placeholder="89894"
+                    value={formData.token}
                     onChange={handleInputChange}
                    />
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email address</label>
-                  <input 
-                  type="email" 
-                  className="form-control" 
-                  id="email" 
-                  placeholder="johndoe@example.com"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  />
                 </div>
 
                 <div className="mb-3">

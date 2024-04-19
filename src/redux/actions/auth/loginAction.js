@@ -5,16 +5,34 @@ import http from "../../../services/http/httpService";
 const initialState = {
   loading: false,
   error: null,
-  token: null,
-  user:null,
+  data:null,
 };
 
 export const loginAction = createAsyncThunk(
   'auth/login',
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await http.post(http.setURL, payload);
-      return response.data.token;
+      const response = await http.post(http.setURL + 'login', payload);
+      return {
+        data: response.data,
+        user: response.data.user, // Assuming user is available in response data
+        statusCode: response.status, // Status code from the HTTP response
+      };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const logoutAction = createAsyncThunk(
+  'auth/logout',
+  async (payload, { rejectWithValue }) => {
+    try {
+      const response = await http.post(http.setURL + 'logout', payload);
+      return {
+        data: response.data,
+        user: response.data.user, // Assuming user is available in response data
+        statusCode: response.status, // Status code from the HTTP response
+      };
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -33,9 +51,11 @@ const loginSlice = createSlice({
         state.error = null;
       })
       .addCase(loginAction.fulfilled, (state, action) => {
+        state.data = action.payload.data;
+        state.user = action.payload.user;
+        state.statusCode = action.payload.statusCode;
         state.loading = false;
-        state.token = action.payload;
-        // state.user = action.payload;
+
       })
       .addCase(loginAction.rejected, (state, action) => {
         state.loading = false;

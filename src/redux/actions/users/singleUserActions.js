@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import http from "../../../services/http/httpService";
-import auth from "../../../services/auth/authService";
 
 
 const initialState = {
@@ -12,11 +11,11 @@ const initialState = {
 
 
 
-export const getPostDetailAction = createAsyncThunk(
-  'post/get/detail',
+export const getUserDetailAction = createAsyncThunk(
+  'user/get/detail',
   async (id, { rejectWithValue }) => {
     try {
-      const response = await http.get(`${http.setURL}posts/${id}`);
+      const response = await http.instance.get(`${http.setURL}users/${id}`);
       return {
         data: response.data,
         statusCode: response.status, // Status code from the HTTP response
@@ -28,23 +27,23 @@ export const getPostDetailAction = createAsyncThunk(
 );
 
 
-const postSlice = createSlice({
-  name: 'posts',
+const userDetailSlice = createSlice({
+  name: 'user_details',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
   
     builder
-      .addCase(getPostDetailAction.pending, (state) => {
+      .addCase(getUserDetailAction.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(getPostDetailAction.fulfilled, (state, action) => {
+      .addCase(getUserDetailAction.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload.data;
         // state.user = action.payload;
       })
-      .addCase(getPostDetailAction.rejected, (state, action) => {
+      .addCase(getUserDetailAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
@@ -53,4 +52,4 @@ const postSlice = createSlice({
 
 
 
-export default postSlice.reducer;
+export default userDetailSlice.reducer;

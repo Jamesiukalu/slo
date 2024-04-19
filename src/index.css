@@ -1,3 +1,11 @@
+/* *{
+  padding: auto;
+  margin: auto;
+  overflow-x: hidden;
+} */
+li{
+  list-style: none;
+}
 .logo-text-1{
   text-transform: uppercase;
   font-weight :150;
@@ -54,4 +62,14 @@ a{
 
 .hero-text-wrapper{
  padding-left: 5rem;
+}
+
+.posts-wrapper{
+  background-color: #f4efef;
+}
+
+.file-input-div{
+  background-color: #d9d6d6;
+  height: 10rem;
+  padding: 1rem;
 }

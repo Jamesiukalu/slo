@@ -10,11 +10,11 @@ const initialState = {
   statusCode: null, // Adding status code to the initial state
 };
 
-export const registerAction = createAsyncThunk(
-  'auth/register',
+export const updatePasswordAction = createAsyncThunk(
+  'auth/reset-password',
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await http.post(http.setURL + 'register', payload);
+      const response = await http.post(http.setURL + 'verify', payload);
       return { data: response.data, statusCode: response.status }; // Returning status code along with data
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -23,23 +23,23 @@ export const registerAction = createAsyncThunk(
 );
 
 
-const registerSlice = createSlice({
-  name: 'register',
+const updatePasswordSlice = createSlice({
+  name: 'update_password',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(registerAction.pending, (state) => {
+      .addCase(updatePasswordAction.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(registerAction.fulfilled, (state, action) => {
+      .addCase(updatePasswordAction.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
         state.statusCode = action.payload.statusCode; // Setting status code from action payload
         // state.user = action.payload;
       })
-      .addCase(registerAction.rejected, (state, action) => {
+      .addCase(updatePasswordAction.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
@@ -48,4 +48,4 @@ const registerSlice = createSlice({
 
 
 
-export default registerSlice.reducer;
+export default updatePasswordSlice.reducer;

@@ -58,19 +58,23 @@ export const AdminLogin = () => {
         <ScreenLoader status={loading} />
         <div className="row justify-content-center">
 
-          <div className="col-sm-10 col-md-8 col-lg-5">
+          <div className="col-sm-8 col-md-6 col-lg-4">
              <div className="card border-0">
               <div className="card-body">
               <div>
-                   
+                   <div className="row justify-content-center">
+                      <div className="col-3">
+                        <img src={logo} alt="" style={{width:'80px'}}/>
+                      </div>
+                      <div className="col-7">
+                        <h3 className="logo-text-1">Standardlife</h3>
+                        <h6 className="logo-text-2">organization</h6>
+                      </div>
+                   </div>
                    <div className="row justify-content-center mt-3">
-                      <div className="col-8">
-                       <h3 className="whitespace-nowrap tracking-tight text-2xl font-bold">
-                        Sign In
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        Fill in your credentials below to get started 😎
-                      </p>
+                      <div className="col-6">
+                        <h3 className="login-text text-center">Login</h3>
+                        <h6 className="logo-text-3">Welcome back 👋</h6>
                       </div>
                      
                    </div>
@@ -101,27 +105,12 @@ export const AdminLogin = () => {
                  placeholder="*********"
                  />
                 </div>
-
-                <div className="mb-3 text-end">
-                    <a href="/forgot-password">Forgot Password?</a>
-                </div>
-
                 <div className="mb-3">
-                  {
-                      error && <div className="alert alert-danger mb-2">{error?.message}</div>
-                    }
-                  <button  className="form-control btn btn-primary">Login</button>
+                 {
+                    error && <div className="alert alert-danger mb-2">{error?.message}</div>
+                  }
+                <button  className="form-control btn btn-primary">Login</button>
                 </div>
-
-                <div className="mb-3 text-center">
-                  <span className="d-inline-block me-2">
-                      Don't have an account?
-                  </span>
-                    <a href="/register" className=" text-end">
-                      Sign up
-                    </a>
-                </div>
-                
               </form>
 
               </div>

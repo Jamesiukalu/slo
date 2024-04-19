@@ -20,7 +20,7 @@ export const Hero  = () => {
     <div className="container my-3">
       <form action="">
         <div className="row justify-content-center">
-           <div className="col-sm-11 col-md-10 col-lg-10">
+           <div className="col-sm-11 col-md-10 col-lg-8">
              <input type="text" className="form-control"  placeholder="Search for articles, blog posts or stories here..." />
            </div>
         </div>

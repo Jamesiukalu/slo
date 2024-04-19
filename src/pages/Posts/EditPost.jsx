@@ -1,28 +1,29 @@
 import React, {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { createPostAction } from "../../redux/actions/posts/createPostActions";
+import { editPostAction } from "../../redux/actions/posts/createPostActions";
+import { getPostDetailAction } from "../../redux/actions/posts/postActions";
 import { ScreenLoader } from "../commons/ScreenLoader";
 import { useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import { categories } from "../../services/helpers";
 
 
-
-export const CreatePost = () => {
- 
+export const EditPost = () => {
 
  const dispatch = useDispatch();
  const error = useSelector(state => state.post_create.error);
  const statusCode = useSelector(state => state.post_create.statusCode);
  const loading = useSelector(state => state.post_create.loading);
+ const post = useSelector(state => state.posts.data);
  const navigation = useNavigate()
+ const {id} = useParams()
 
-
- const [formData, setFormData] = useState({
-    title: '',
-    body: '',
-    category:''
-  })
+const [formData, setFormData] = useState({
+    title: "",
+    body: "",
+    category: ''
+  });
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewURL, setPreviewURL] = useState('');
@@ -50,39 +51,52 @@ export const CreatePost = () => {
   }
 
   
-    const createPost = async (e) => {
+    const updatePost = async (e) => {
       e.preventDefault();
       const data = new FormData();
       data.append('media', selectedFile);
       data.append('title', formData.title)
       data.append('body', formData.body)
       data.append('category', formData.category)
-      dispatch(createPostAction(data));
+      dispatch(editPostAction({data,id}));
   };
 
   const successMessage = () => {
     if(statusCode && statusCode ===201){
-      toast.success("Post created", {autoClose:200})
+      toast.success("Post updated", {autoClose:200})
        navigation('/blogs')
     }
   }
+  
 
   
-  useEffect(()=>{
-     successMessage()
-  }, [statusCode])
+  
+  useEffect(() => {
+    if (!post) {
+      dispatch(getPostDetailAction(id));
+    } else {
+      setFormData({
+        title: post.data.title || "",
+        body: post.data.body || "",
+        category: post.data.category || ''
+      });
+    }
+    successMessage()
+  }, [post, dispatch, id, statusCode]);
 
    return (
       <>
-      
-      <ScreenLoader status={loading} />
+        <ScreenLoader status={loading} />
+
+      {
+        post &&
         <div className="row justify-content-center">
           
           <div className="col-sm-8 col-md-8 col-lg-6">
              <div className="card border-0">
               <div className="card-body">
 
-              <form onSubmit={createPost}>
+              <form onSubmit={updatePost}>
               <div>
                   {
                     error && <div className="alert alert-danger mb-2">{error?.message}</div>
@@ -136,29 +150,30 @@ export const CreatePost = () => {
 
                 <div className="mb-3">
                   <label htmlFor="category" className="form-label">Category</label>
-                  <select 
-                   name="category" 
-                   className="form-control"
-                   id="category" 
-                    placeholder="Investments"
-                    value={formData.title}
-                    onChange={handleInputChange}
-                   >
-                     <option value="">select category</option>
-                     {
+                  <select
+                      name="category"
+                      className="form-control"
+                      id="body"
+                      value={formData.category}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">Select category</option>
+                      {
                         categories.map(category => (
                           <option key={category} value={category}>{category}</option>
                         ))
                       }
-                   </select>
+                    </select>
                 </div>
 
+              
+                
                 <div className="mb-3">
-                  <label htmlFor="body" className="form-label">Body</label>
+                  <label htmlFor="password" className="form-label">Body</label>
                   <textarea 
                    
                   className="form-control" 
-                  id="body" 
+                  id="password" 
                   placeholder="Good services"
                    value={formData.body}
                    onChange={handleInputChange}
@@ -171,6 +186,7 @@ export const CreatePost = () => {
              </div>
           </div>
         </div>
+      }
       </>
 
    )
