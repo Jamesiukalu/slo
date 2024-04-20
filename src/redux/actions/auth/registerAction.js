@@ -14,7 +14,7 @@ export const registerAction = createAsyncThunk(
   'auth/register',
   async (payload, { rejectWithValue }) => {
     try {
-      const response = await http.post(http.setURL + 'register', payload);
+      const response = await http.instance.post(payload.url, payload.data);
       return { data: response.data, statusCode: response.status }; // Returning status code along with data
     } catch (error) {
       return rejectWithValue(error.response.data);

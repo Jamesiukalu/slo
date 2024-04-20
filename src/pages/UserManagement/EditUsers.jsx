@@ -2,22 +2,20 @@ import React, {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserAction } from "../../redux/actions/users/updateUserAction";
 import { getUserDetailAction } from "../../redux/actions/users/singleUserActions";
-import { ScreenLoader } from "../commons/ScreenLoader";
 import { useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { ButtonLoader } from "../commons/ButtonLoader";
 
 
-export const EditUser = () => {
+export const EditUser = ({userId}) => {
 
  const dispatch = useDispatch();
  const error = useSelector(state => state.user_update.error);
  const statusCode = useSelector(state => state.user_details.statusCode);
- const updateStatusCode = useSelector(state => state.user_update.updateStatusCode);
+
  const loading = useSelector(state => state.user_update.loading);
  const userData = useSelector(state => state.user_details.data);
  const navigation = useNavigate()
- const {id} = useParams()
 
 const [formData, setFormData] = useState({
     name: "",
@@ -37,22 +35,14 @@ const [formData, setFormData] = useState({
   
     const updateUser = async (e) => {
       e.preventDefault();
-      dispatch(updateUserAction({data:{...formData},id}));
+      dispatch(updateUserAction({data:formData,id: userId}));
   };
-
-  const navigateToNextPage = () => {
-    if(updateStatusCode >= 200 && updateStatusCode <=299){
-      toast.success("Users updated successfull", {autoClose:300})
-      navigation('/users')
-    }
-  }
-  
 
   
   
   useEffect(() => {
     if (!userData) {
-      dispatch(getUserDetailAction(id));
+      dispatch(getUserDetailAction(userId));
     } else {
       setFormData({
         name: userData.data.name || "",
@@ -60,15 +50,13 @@ const [formData, setFormData] = useState({
         user_type:'Admin'
       });
     }
-    navigateToNextPage()
-  }, [userData, dispatch, id, statusCode, updateStatusCode]);
+  }, [userData, dispatch, userId, statusCode]);
 
   return (
     <div>
-      <ScreenLoader status={loading} />
       <div className="row justify-content-center">
 
-        <div className="col-sm-8 col-md-6 col-lg-4">
+        <div className="col-sm-12 col-md-10 col-lg-10">
            <div className="card border-0">
             <div className="card-body">
             <form onSubmit={updateUser}>
@@ -103,6 +91,9 @@ const [formData, setFormData] = useState({
                 {
                   error && <div className="alert alert-danger mb-2">{error?.message}</div>
                 }
+
+              <ButtonLoader status={loading}/>
+
               <button  className="form-control btn btn-primary">Update</button>
               </div>
             </form>

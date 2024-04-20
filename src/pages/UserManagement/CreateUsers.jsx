@@ -1,15 +1,12 @@
 import React, {useState, useEffect} from "react"
 import { useDispatch,useSelector } from "react-redux";
 import { registerAction } from "../../redux/actions/auth/registerAction";
-import { useNavigate } from 'react-router-dom';
-import { ScreenLoader } from "../commons/ScreenLoader";
 import { toast } from "react-toastify";
-
+import { ButtonLoader } from "../commons/ButtonLoader";
 
 
 export const CreateUsers = () => {
  const dispatch = useDispatch();
- const navigation = useNavigate()
  const error = useSelector(state => state.register.error);
  const statusCode = useSelector(state => state.register.statusCode);
  const loading = useSelector(state => state.register.loading);
@@ -43,32 +40,16 @@ export const CreateUsers = () => {
     }else{
       setInvalidPassord(false)
       setInvalidPassordError("")
-       dispatch(registerAction({ ...formData, user_type:'Admin' }));
-
+       dispatch(registerAction({ data: formData, url:'admin_register' }));
       }
   };
 
 
-  const navigateToNextPage = () => {
-    if(statusCode >= 200 && statusCode <=299){
-      toast.success("Users created successfull", {autoClose:300})
-      navigation('/users')
-    }
-  }
-
-  
-  useEffect(()=>{
-     navigateToNextPage()
-  }, [statusCode])
-
-
-
   return (
       <div>
-        <ScreenLoader status={loading} />
         <div className="row justify-content-center">
 
-          <div className="col-sm-8 col-md-6 col-lg-4">
+          <div className="col-12">
              <div className="card border-0">
               <div className="card-body">
               <form onSubmit={register}>
@@ -131,7 +112,10 @@ export const CreateUsers = () => {
                   {
                     error && <div className="alert alert-danger mb-2">{error?.message}</div>
                   }
-                <button  className="form-control btn btn-primary">Rgister</button>
+                  <ButtonLoader status={loading}/>
+                <button  className={`form-control btn btn-primary`}>
+                  Save
+                </button>
                 </div>
               </form>
 

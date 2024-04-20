@@ -42,3 +42,9 @@ export function getSubString(string, length=0)
   return sub
 
 }
+
+export function getInitial(fullName)
+{
+  const initials = fullName.split(" ").map(word => word[0]).join("");
+  return initials
+}

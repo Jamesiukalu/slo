@@ -37,7 +37,7 @@ export const SendForgotPasswordEmail = () => {
   const navigateToNextPage = () => {
     if(statusCode >= 200 && statusCode <=299){
       toast.success("Verification successfull", {autoClose:300})
-      navigation('/reset-password?token=849348938')    }
+      navigation('/reset-password')    }
   }
 
   

@@ -5,9 +5,7 @@ import { ScreenLoader } from "../commons/ScreenLoader";
 import { useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { categories } from "../../services/helpers";
-
-
-
+import { FaArrowLeft } from "react-icons/fa";
 export const CreatePost = () => {
  
 
@@ -88,6 +86,12 @@ export const CreatePost = () => {
                     error && <div className="alert alert-danger mb-2">{error?.message}</div>
                   }
                    <div className="row mb-3">
+                      <div className="col-12 mb-4">
+                        <a href="/blogs" className="text-secondary">
+                            <FaArrowLeft className="text-primary me-3" /> Back
+                        </a>
+                      </div>
+
                       <div className="col d-flex justify-content-between">
                        <h4 className="text-s">
                         Create A Post

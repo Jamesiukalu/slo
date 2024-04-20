@@ -47,7 +47,7 @@ li{
   height: 1rem;
 }
 a{
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .hero{

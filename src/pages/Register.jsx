@@ -44,13 +44,8 @@ export const Register = () => {
     }else{
       setInvalidPassord(false)
       setInvalidPassordError("")
-      await dispatch(registerAction({ ...formData }));
-      
-      if(statusCode >= 200 && statusCode <=299){
-         
-          navigation('/verify/email-otp')
-        }
-      }
+       dispatch(registerAction({ data:formData, url: 'register'}));
+    }
   };
 
   const navigateToNextPage = () => {

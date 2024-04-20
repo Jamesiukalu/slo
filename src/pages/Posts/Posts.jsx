@@ -5,6 +5,7 @@ import {getPostDataAction} from "../../redux/actions/posts/postDataActions";
 import {deletePostAction} from "../../redux/actions/posts/deletePostActions";
 import { ScreenLoader } from "../commons/ScreenLoader";
 import { toast } from "react-toastify";
+import { AdminHeader } from "../commons/AdminHeader";
 
 export const Posts = () => {
 
@@ -37,6 +38,7 @@ useEffect(() => {
         <>
         
          <ScreenLoader status={deletePostLoading}/>
+         <AdminHeader/>
           <div className="posts-wrapper">
             <div className="container p-4">
                <div className="d-flex justify-content-between mb-2">

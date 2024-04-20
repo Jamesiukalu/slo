@@ -5,7 +5,7 @@ import { getCommentLstsAction } from "../../redux/actions/posts/commentListActio
 import { useParams } from 'react-router-dom';
 import { ScreenLoader } from "../commons/ScreenLoader";
 import { toast } from "react-toastify";
-import { formatDateTime, getSubString } from "../../services/helpers";
+import { formatDateTime, getInitial, getSubString } from "../../services/helpers";
 import auth from "../../services/auth/authService";
 
 export const Comment = () => {
@@ -42,8 +42,9 @@ export const Comment = () => {
   useEffect(() => {
         dispatch(getCommentLstsAction(id))
   }, [dispatch]);
-  console.log(comments)
-    return  (
+
+
+  return  (
         <>
         <ScreenLoader status={loading}/>
             <div className="row justify-content-center px-4">
@@ -91,9 +92,20 @@ export const Comment = () => {
                     <div key={comment.id} className="row justify-content-center px-4">
                     <div className="col-md-10 col-lg-10">
                         <div className="mb-4">
-                            <small>{comment.commenter.name}</small>
-                            <br />
-                            <small>{formatDateTime(comment.created_on)}</small>
+                            <div className="d-flex">
+                               
+                                <small class="badge badge-sm me-5 rounded-pill bg-primary">
+                                    {
+                                        getInitial(comment.commenter.name)
+                                    }
+                                </small>
+
+                                <div>
+                                    <small>{comment.commenter.name}</small>
+                                    <br />
+                                    <small>{formatDateTime(comment.created_on)}</small>
+                                </div>
+                            </div>
                         </div>
                        <p>{getSubString( comment.comment, 200)}</p>
                         
