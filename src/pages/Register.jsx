@@ -96,6 +96,7 @@ export const Register = () => {
                     placeholder="John Doe"
                     value={formData.name}
                     onChange={handleInputChange}
+                    required
                    />
                 </div>
 
@@ -109,6 +110,7 @@ export const Register = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
+                  required
                   />
                 </div>
 
@@ -122,6 +124,7 @@ export const Register = () => {
                    value={formData.password}
                    onChange={handleInputChange}
                    name="password"
+                   required
                   />
                 </div>
 
