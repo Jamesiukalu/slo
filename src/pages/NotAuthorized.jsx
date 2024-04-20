@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const NotAuthorized  = () => {
   return (
-    <div id='notfound'>
+    <div id='notfound' className='text-center'>
       <div className="notfound">
         <div className="notfound-404"></div>
         <h1>401</h1>

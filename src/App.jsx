@@ -21,34 +21,34 @@ import { ResetPassword } from './pages/ResetPassword'
 import NotAuthorized from './pages/NotAuthorized'
 import { ProtectedRoute } from './pages/ProtectedRoute'
 import { AdminProtectedRoute } from './pages/AdminProtectedRoute'
+import { BlogPosts } from './pages/Posts/BlogPosts'
 
 function App() {
   
   return (
       <>
-      <Navbar/>
         <Router>
+        <Navbar/>
         <ToastContainer />
           <Routes>
             <Route path='/' element={<Home/>} />
             <Route path='/login' element={<AdminLogin/>} />
             <Route path='/logout' element={<Logout/>} />
+            <Route path='/blogs/posts' element={<BlogPosts/>} />
 
             <Route path="/" element={<ProtectedRoute />}>
               
               {/* Admin Protected Routes */}
               <Route path="/" element={<AdminProtectedRoute />}>
                   <Route path='/create/post' element={<CreatePost/>} />
-                  <Route path='/create/users' element={<CreateUsers/>} />
                   <Route path='/users' element={<Users/>} />
-                  <Route path='/user/edit/:id' element={<EditUser/>} />
                   <Route path='/post/edit/:id' element={<EditPost/>} />
-                  <Route path='/post/details/:id' element={<SinglePost/>} />
                   <Route path='/blogs' element={<Posts/>} />
               </Route>
             </Route>
             
            
+            <Route path='/post/details/:id' element={<SinglePost/>} />
             <Route path='/register' element={<Register/>} />
             <Route path='/verify/email-otp' element={<VerifyEmail/>} />
             <Route path='/forgot-password' element={<SendForgotPasswordEmail/>} />

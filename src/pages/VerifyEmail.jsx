@@ -78,6 +78,7 @@ export const VerifyEmail = () => {
                     placeholder="123458"
                     value={formData.token}
                     onChange={handleInputChange}
+                    required
                    />
                 </div>
 

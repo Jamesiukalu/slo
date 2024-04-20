@@ -2,18 +2,16 @@ import React, {useState, useEffect} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createPostAction } from "../../redux/actions/posts/createPostActions";
 import { ScreenLoader } from "../commons/ScreenLoader";
-import { useNavigate} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { categories } from "../../services/helpers";
 import { FaArrowLeft } from "react-icons/fa";
-export const CreatePost = () => {
- 
 
+export const CreatePost = () => {
  const dispatch = useDispatch();
  const error = useSelector(state => state.post_create.error);
- const statusCode = useSelector(state => state.post_create.statusCode);
+ let statusCode = useSelector(state => state.post_create.statusCode);
  const loading = useSelector(state => state.post_create.loading);
- const navigation = useNavigate()
 
 
  const [formData, setFormData] = useState({
@@ -61,7 +59,7 @@ export const CreatePost = () => {
   const successMessage = () => {
     if(statusCode && statusCode ===201){
       toast.success("Post created", {autoClose:200})
-       navigation('/blogs')
+      window.location.href= '/blogs'
     }
   }
 
@@ -87,9 +85,9 @@ export const CreatePost = () => {
                   }
                    <div className="row mb-3">
                       <div className="col-12 mb-4">
-                        <a href="/blogs" className="text-secondary">
+                        <Link to="/blogs" className="text-secondary">
                             <FaArrowLeft className="text-primary me-3" /> Back
-                        </a>
+                        </Link>
                       </div>
 
                       <div className="col d-flex justify-content-between">

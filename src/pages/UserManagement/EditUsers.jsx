@@ -70,6 +70,7 @@ const [formData, setFormData] = useState({
                   placeholder="John Doe"
                   value={formData.name}
                   onChange={handleInputChange}
+                  required
                  />
               </div>
 
@@ -83,6 +84,7 @@ const [formData, setFormData] = useState({
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                required
                 />
               </div>
              

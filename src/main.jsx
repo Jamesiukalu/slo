@@ -7,7 +7,7 @@ import './button-loader.css';
 import { Provider } from 'react-redux';
 import store from './redux/store.js';
 import 'react-toastify/dist/ReactToastify.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 

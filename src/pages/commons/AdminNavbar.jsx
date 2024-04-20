@@ -2,6 +2,8 @@ import React from "react"
 import logo from '../../assets/logo/image1.jpg'
 import auth from "../../services/auth/authService"
 import {  useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 
 
 export const AdminNavbar  = () => {
@@ -32,14 +34,16 @@ export const AdminNavbar  = () => {
                
                 <ul className="navbar-nav ms-auto " role="search">
                    <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         {user?.name || userData?.data?.name}
-                    </a>
+                    </Link>
                     <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="/logout">Logout</a></li>
-                        {/* <li><a className="dropdown-item" href="#">Another action</a></li>
-                        <li><hr className="dropdown-divider"/></li>
-                        <li><a className="dropdown-item" href="#">Something else here</a></li> */}
+
+                        <li>
+                            <Link className="dropdown-item" to="/blogs/posts">Blogs</Link>
+                        </li>
+                        <li><Link className="dropdown-item" to="/logout">Logout</Link></li>
+                       
                     </ul>
                     </li>
                 </ul>

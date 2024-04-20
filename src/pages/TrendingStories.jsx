@@ -1,6 +1,7 @@
 import React from "react"
 import logo from "../assets/Rectangle1.png"
 import { formatDateTime, getSubString } from "../services/helpers"
+import { BiTimer } from "react-icons/bi"
 
 export const Trending  = ({props}) => {
   return(
@@ -10,7 +11,7 @@ export const Trending  = ({props}) => {
         <div className="row justify-content-center">
             {
                 props?.data[0] ? 
-            <div className="col-sm-12 col-10 col-lg-8 ">
+            <div className="col-sm-12 col-10 col-lg-10 ">
 
                 <h4>Trending Stories</h4>
                 
@@ -21,7 +22,7 @@ export const Trending  = ({props}) => {
                         <div className="col-sm-11 col-md-9 col-lg-8">
                             <div className="card border-0">
                                 <div className="card-body">
-                                    <img src= {props?.data[0]?.media} alt="Logo" style={{width:"100%"}} />
+                                    <img src= {props?.data[0]?.media} alt="Logo" style={{width:"100%", height:"240px"}} />
                                 <div className="card-footer px-1 border-0">
                                     <small className="btn btn-sm btn-secondary">
                                         {props?.data[0]?.category}
@@ -37,7 +38,7 @@ export const Trending  = ({props}) => {
                                     </article>
                                     <div className="d-flex justify-content-between px-1">
                                         <small>
-                                            {formatDateTime( props?.data[0]?.created_on)}
+                                        <BiTimer />  {formatDateTime( props?.data[0]?.created_on)}
                                         </small>
                                         <small>
                                             <a href={`/post/details/${props?.data[0]?.id}`}>Read More </a>
@@ -55,7 +56,7 @@ export const Trending  = ({props}) => {
                         <div className="col-sm-11 col-md-9 col-lg-4">
                             <div className="card border-0">
                                 <div className="card-body pb-1">
-                                            <img src= {props?.data[1]?.media} alt="Logo" style={{width:"100%"}} />
+                                            <img src= {props?.data[1]?.media} alt="Logo" style={{width:"70%", height:"100px"}} />
                                         <div className="card-footer px-1 border-0">
                                             <small className="btn btn-sm btn-secondary">
                                                 {props?.data[1]?.category}
@@ -68,7 +69,7 @@ export const Trending  = ({props}) => {
                                             </article>
                                             <div className="d-flex justify-content-between px-1">
                                                 <small>
-                                                    {formatDateTime( props?.data[1]?.created_on)}
+                                                <BiTimer />  {formatDateTime( props?.data[1]?.created_on)}
                                                 </small>
                                                 
                                             </div>
@@ -77,9 +78,9 @@ export const Trending  = ({props}) => {
                             </div>
                             {
                                 props?.data[2] &&
-                                <div className="card border-0" style={{marginTop:"-2rem"}}>
+                                <div className="card border-0" >
                                     <div className="card-body">
-                                                <img src= {props?.data[2]?.media} alt="Logo" style={{width:"100%"}} />
+                                                <img src= {props?.data[2]?.media} alt="Logo" style={{width:"100%", height:"70px"}} />
                                             <div className="card-footer px-1 border-0">
                                                 <small className="btn btn-sm btn-secondary">
                                                     {props?.data[2]?.category}
@@ -92,7 +93,7 @@ export const Trending  = ({props}) => {
                                                 </article>
                                                 <div className="d-flex justify-content-between px-1">
                                                     <small>
-                                                        {formatDateTime( props?.data[2]?.created_on)}
+                                                    <BiTimer />    {formatDateTime( props?.data[2]?.created_on)}
                                                     </small>
                                                     
                                                 </div>
@@ -113,7 +114,7 @@ export const Trending  = ({props}) => {
                         <div className="col-sm-11 col-md-9 col-lg-4">
                             <div className="card border-0">
                                 <div className="card-body">
-                                    <img src= {props?.data[3]?.media} alt="Logo" style={{width:"100%"}} />
+                                    <img src= {props?.data[3]?.media} alt="Logo" style={{width:"100%", height:'150px'}} />
                                 <div className="card-footer px-1 border-0">
                                     <small className="btn btn-sm btn-secondary">
                                         {props?.data[3]?.category}
@@ -145,7 +146,7 @@ export const Trending  = ({props}) => {
                             <div className="col-sm-11 col-md-9 col-lg-4">
                                 <div className="card border-0">
                                     <div className="card-body">
-                                        <img src= {props?.data[4]?.category} alt="Logo" style={{width:"100%"}} />
+                                        <img src= {props?.data[4]?.media} alt="Logo" style={{width:"100%", height:"150px"}} />
                                     <div className="card-footer px-1 border-0">
                                         <small className="btn btn-sm btn-secondary">
                                             {props?.data[4]?.category}
@@ -161,7 +162,7 @@ export const Trending  = ({props}) => {
                                         </article>
                                         <div className="d-flex justify-content-between px-1">
                                             <small>
-                                                {formatDateTime( props?.data[4]?.created_on)}
+                                            <BiTimer />   {formatDateTime( props?.data[4]?.created_on)}
                                             </small>
                                             <small>
                                                 <a href={`/post/details/${props?.data[4]?.id}`}>Read More </a>
@@ -175,36 +176,36 @@ export const Trending  = ({props}) => {
                         }
                         {
                             props?.data[5] &&
-                        <div className="col-sm-11 col-md-9 col-lg-4">
-                            <div className="card border-0">
-                                <div className="card-body">
-                                    <img src= {props?.data[5]?.media} alt="Logo" style={{width:"100%"}} />
-                                <div className="card-footer px-1 border-0">
-                                    <small className="btn btn-sm btn-secondary">
-                                        {props?.data[5]?.category}
-                                    </small>
-                                    <article>
-                                        <h6>
-                                            {getSubString( props?.data[5]?.title,15)}
-                                        </h6>
-                                        <p>
-                                            {getSubString(props?.data[5]?.body,20)}
-                                        </p>
+                            <div className="col-sm-11 col-md-9 col-lg-4">
+                                <div className="card border-0">
+                                    <div className="card-body">
+                                        <img src= {props?.data[5]?.media} alt="Logo" style={{width:"100%", height:'150px'}} />
+                                    <div className="card-footer px-1 border-0">
+                                        <small className="btn btn-sm btn-secondary">
+                                            {props?.data[5]?.category}
+                                        </small>
+                                        <article>
+                                            <h6>
+                                                {getSubString( props?.data[5]?.title,15)}
+                                            </h6>
+                                            <p>
+                                                {getSubString(props?.data[5]?.body,20)}
+                                            </p>
 
-                                    </article>
-                                    <div className="d-flex justify-content-between px-1">
-                                        <small>
-                                            {formatDateTime( props?.data[5]?.created_on)}
-                                        </small>
-                                        <small>
-                                            <a href={`/post/details/${props?.data[5]?.id}`}>Read More </a>
-                                        </small>
+                                        </article>
+                                        <div className="d-flex justify-content-between px-1">
+                                            <small>
+                                            <BiTimer />   {formatDateTime( props?.data[5]?.created_on)}
+                                            </small>
+                                            <small>
+                                                <a href={`/post/details/${props?.data[5]?.id}`}>Read More </a>
+                                            </small>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
-                                </div>
+                                
                             </div>
-                            
-                        </div>
                         }
                     </div>
                 }
@@ -232,7 +233,7 @@ export const Trending  = ({props}) => {
                         <div className="col-sm-11 col-md-9 col-lg-6">
                             <div className="card border-0">
                                 <div className="card-body">
-                                    <img src= {props?.data[5]?.media} alt="Logo" style={{width:"100%"}} />
+                                    <img src= {props?.data[5]?.media} alt="Logo" style={{width:"100%", height:'150px'}} />
                                 <div className="card-footer px-1 border-0">
                                     <small className="btn btn-sm btn-secondary">
                                         {props?.data[5]?.category}
@@ -248,7 +249,7 @@ export const Trending  = ({props}) => {
                                     </article>
                                     <div className="d-flex justify-content-between px-1">
                                         <small>
-                                            {formatDateTime( props?.data[5]?.created_on)}
+                                        <BiTimer />    {formatDateTime( props?.data[5]?.created_on)}
                                         </small>
                                         <small>
                                             <a href={`/post/details/${props?.data[5]?.id}`}>Read More </a>
@@ -265,7 +266,7 @@ export const Trending  = ({props}) => {
                             <div className="col-sm-11 col-md-9 col-lg-6">
                                 <div className="card border-0">
                                     <div className="card-body">
-                                        <img src= {props?.data[6]?.media} alt="Logo" style={{width:"100%"}} />
+                                        <img src= {props?.data[6]?.media} alt="Logo" style={{width:"100%", height:"150px"}} />
                                     <div className="card-footer px-1 border-0">
                                         <small className="btn btn-sm btn-secondary">
                                             {props?.data[6]?.category}
@@ -281,7 +282,7 @@ export const Trending  = ({props}) => {
                                         </article>
                                         <div className="d-flex justify-content-between px-1">
                                             <small>
-                                                {formatDateTime( props?.data[6]?.created_on)}
+                                            <BiTimer />     {formatDateTime( props?.data[6]?.created_on)}
                                             </small>
                                             <small>
                                                 <a href={`/post/details/${props?.data[6]?.id}`}>Read More </a>

@@ -2,6 +2,7 @@ import React from "react"
 import logo from '../../assets/logo/image1.jpg'
 import auth from "../../services/auth/authService"
 import {  useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 export const UserNavbar  = () => {
@@ -10,7 +11,7 @@ export const UserNavbar  = () => {
     return (
         <nav className="navbar navbar-expand-lg bg-body-white">
             <div className="container-fluid">
-            <a className="navbar-brand mx-auto" href ="/">
+            <Link className="navbar-brand mx-auto" to ="/">
                 <div className="row justify-content-center">
                         <div className="col-3">
                             <img src={logo} alt="logo" className="logo"/>
@@ -20,7 +21,7 @@ export const UserNavbar  = () => {
                             <p className="logo-nav-text-2">organization</p>
                         </div>
                     </div>
-                </a>
+                </Link>
 
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -29,17 +30,18 @@ export const UserNavbar  = () => {
                     
                     <ul className="navbar-nav ms-auto me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                        <a className="nav-link active text-uppercase" aria-current="page" href="/">Home</a>
+                        <Link className="nav-link active text-uppercase" aria-current="page" to="/">Home</Link>
                         </li>
                         <li className="nav-item">
-                        <a className="nav-link text-uppercase" href="#">about us</a>
+                        <Link className="nav-link text-uppercase" to="#">about us</Link>
                         </li>
                         <li className="nav-item">
-                        <a className="nav-link text-uppercase" href="#">contact us</a>
+                        <Link className="nav-link text-uppercase" to="#">contact us</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link text-uppercase" href="/create/post">blog</a>
+                        <Link className="nav-link text-uppercase" to="/blogs/posts">Posts</Link>
                         </li>
+                       
                     </ul>
                    
                    {/* Check if there is logged in user */}
@@ -47,11 +49,11 @@ export const UserNavbar  = () => {
                     user || userData ?
                     <ul className="navbar-nav ms-auto " role="search">
                     <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <Link className="nav-link dropdown-toggle" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             {user?.name || userData?.data?.name}
-                        </a>
+                        </Link>
                         <ul className="dropdown-menu">
-                            <li><a className="dropdown-item" href="/logout">Logout</a></li>
+                            <li><Link className="dropdown-item" to="/logout">Logout</Link></li>
                         </ul>
                         </li>
                     </ul>
@@ -59,10 +61,10 @@ export const UserNavbar  = () => {
                     
                     <ul className="navbar-nav" role="search">
                         <li className="nav-item">
-                            <a className="btn btn-default outline-double" aria-current="page" href="/login">Log in</a>
+                            <Link className="btn btn-default outline-double" aria-current="page" to="/login">Log in</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="btn btn-primary" aria-current="page" href="/register">Sign Up</a>
+                            <Link className="btn btn-primary" aria-current="page" to="/register">Sign Up</Link>
                         </li>
                     </ul>
                     }

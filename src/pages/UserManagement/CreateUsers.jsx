@@ -76,6 +76,7 @@ export const CreateUsers = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
+                  required
                   />
                 </div>
 
@@ -90,6 +91,7 @@ export const CreateUsers = () => {
                    value={formData.password}
                    onChange={handleInputChange}
                    name="password"
+                   required
                   />
                 </div>
 
@@ -103,6 +105,7 @@ export const CreateUsers = () => {
                   name="password_confirmation"
                   value={formData.password_confirmation}
                   onChange={handleInputChange}
+                  required
                   />
                 </div>
                 <div className="mb-3">

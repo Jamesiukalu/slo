@@ -7,6 +7,7 @@ import { ScreenLoader } from "../commons/ScreenLoader";
 import { toast } from "react-toastify";
 import { formatDateTime, getInitial, getSubString } from "../../services/helpers";
 import auth from "../../services/auth/authService";
+import { BiTimer } from "react-icons/bi";
 
 export const Comment = () => {
     const {id} = useParams()
@@ -50,6 +51,7 @@ export const Comment = () => {
             <div className="row justify-content-center px-4">
               <div className="col-md-10 col-lg-10">
                 <h5>Comments</h5>
+               
                 <hr />
                 
                 <form onSubmit={postComment}>
@@ -92,18 +94,23 @@ export const Comment = () => {
                     <div key={comment.id} className="row justify-content-center px-4">
                     <div className="col-md-10 col-lg-10">
                         <div className="mb-4">
-                            <div className="d-flex">
-                               
-                                <small class="badge badge-sm me-5 rounded-pill bg-primary">
+                            <div className="row ">
+                                <div className="col-1">
+                                <small class="badge rounded-pill p-1 bg-primary">
                                     {
                                         getInitial(comment.commenter.name)
                                     }
                                 </small>
 
-                                <div>
+                                </div>
+                               
+
+                                <div className="col-4">
                                     <small>{comment.commenter.name}</small>
                                     <br />
-                                    <small>{formatDateTime(comment.created_on)}</small>
+                                    <small> 
+                                    <BiTimer />  {formatDateTime(comment.created_on)}
+                                    </small>
                                 </div>
                             </div>
                         </div>

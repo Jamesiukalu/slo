@@ -6,6 +6,8 @@ import {deletePostAction} from "../../redux/actions/posts/deletePostActions";
 import { ScreenLoader } from "../commons/ScreenLoader";
 import { toast } from "react-toastify";
 import { AdminHeader } from "../commons/AdminHeader";
+import { Link } from 'react-router-dom';
+
 
 export const Posts = () => {
 
@@ -23,8 +25,8 @@ export const Posts = () => {
  const navigateToNextPage = () => {
   if(statusCode && statusCode >=200 && statusCode <= 299){
     toast.success("post deleted successfull", {autoClose:300})
-    window.location.reload()
-  }
+      dispatch(getPostDataAction({}))
+    }
 }
 
 
@@ -38,12 +40,13 @@ useEffect(() => {
         <>
         
          <ScreenLoader status={deletePostLoading}/>
+         <ScreenLoader status={loading}/>
          <AdminHeader/>
           <div className="posts-wrapper">
             <div className="container p-4">
                <div className="d-flex justify-content-between mb-2">
                  <h5>Blog Post</h5>
-                 <a href="/create/post" className="btn btn-sm btn-primary">+Add New Post</a>
+                 <Link to="/create/post" className="btn btn-sm btn-primary">+Add New Post</Link>
                </div>
             <div className="table-responsive">
             <table className="table">

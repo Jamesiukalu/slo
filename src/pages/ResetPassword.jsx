@@ -91,6 +91,7 @@ export const ResetPassword = () => {
                    value={formData.password}
                    onChange={handleInputChange}
                    name="password"
+                   required
                   />
                 </div>
 
@@ -104,6 +105,7 @@ export const ResetPassword = () => {
                   name="password_confirmation"
                   value={formData.password_confirmation}
                   onChange={handleInputChange}
+                  required
                   />
                 </div>
                 <div className="mb-3">

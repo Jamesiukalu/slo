@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editPostAction } from "../../redux/actions/posts/createPostActions";
 import { getPostDetailAction } from "../../redux/actions/posts/postActions";
 import { ScreenLoader } from "../commons/ScreenLoader";
-import { useNavigate} from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import { categories } from "../../services/helpers";
@@ -104,9 +104,9 @@ const [formData, setFormData] = useState({
                   }
                    <div className="row mb-3">
                     <div className="col-12 mb-4">
-                        <a href="/blogs" className="text-secondary">
+                        <Link to="/blogs" className="text-secondary">
                             <FaArrowLeft className="text-primary me-3" /> Back
-                        </a>
+                        </Link>
                       </div>
                       <div className="col d-flex justify-content-between">
                        <h4 className="text-s">
@@ -127,8 +127,6 @@ const [formData, setFormData] = useState({
                    type="file" 
                    name="media" 
                    className="form-control"
-               
-                    // value={formData.media}
                     onChange={handleFileChange}
                    />
                    <div className="row">
@@ -151,6 +149,7 @@ const [formData, setFormData] = useState({
                     placeholder="Investments"
                     value={formData.title}
                     onChange={handleInputChange}
+                    required
                    />
                 </div>
 
@@ -160,6 +159,7 @@ const [formData, setFormData] = useState({
                       name="category"
                       className="form-control"
                       id="body"
+                      required
                       value={formData.category}
                       onChange={handleInputChange}
                     >
@@ -182,6 +182,7 @@ const [formData, setFormData] = useState({
                   id="password" 
                   placeholder="Good services"
                    value={formData.body}
+                   required
                    onChange={handleInputChange}
                    name="body"
                   />
