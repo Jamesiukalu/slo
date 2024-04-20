@@ -6,6 +6,7 @@ import {getPostDataAction} from "../../redux/actions/posts/postDataActions";
 import { Link } from "react-router-dom";
 import { AdminHeader } from "../commons/AdminHeader";
 import auth from "../../services/auth/authService";
+import { BiTimer } from "react-icons/bi";
 
 
 export const BlogPosts = () => {
@@ -53,7 +54,7 @@ export const BlogPosts = () => {
                                         </article>
                                         <div className="d-flex justify-content-between px-1">
                                             <small>
-                                                {formatDateTime( data?.created_on)}
+                                            <BiTimer/>    {formatDateTime( data?.created_on)}
                                             </small>
                                             <small>
                                                 <Link to={`/post/details/${data?.id}`}>Read More </Link>
