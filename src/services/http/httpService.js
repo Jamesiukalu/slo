@@ -1,9 +1,9 @@
 import axios from "axios";
 // import { toast } from "react-toastify";
 import auth from "../auth/authService";
-// const url ='https://blog-rest-api-fg6j.onrender.com/'
+const url ='https://blog-rest-api-fg6j.onrender.com/'
 
-const url ='http://127.0.0.1:7000/'
+// const url ='http://127.0.0.1:7000/'
 
 axios.interceptors.response.use(null, error => {
   const expectedError =
