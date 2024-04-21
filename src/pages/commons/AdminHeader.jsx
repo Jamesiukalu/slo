@@ -1,8 +1,8 @@
 import React from "react"
 import { HiOutlineHome } from "react-icons/hi";
 import { Link, useLocation } from 'react-router-dom';
-import { HiUsers } from "react-icons/hi2";
 import { BiLogoBlogger } from "react-icons/bi";
+import { FaUserFriends } from "react-icons/fa";
 
 
 
@@ -23,7 +23,7 @@ export const AdminHeader  = () => {
                 </li>
                 <li className="nav-item">
                     <Link to="/users" className={`btn-primary btn-sm ${location.pathname == '/users'? 'active':"default"}`}>
-                      <HiUsers />
+                        <FaUserFriends/>
                        <span className="d-inline-block mt-2 ms-2">
                          User Management
                         </span>

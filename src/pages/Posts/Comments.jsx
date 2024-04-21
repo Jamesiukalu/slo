@@ -31,19 +31,25 @@ export const Comment = () => {
   const postComment = async (e) => {
     e.preventDefault();
      await dispatch(createCommentAction({ data:{...formData}, id }));
-     if(createStatusCode && createStatusCode ==201){
+     
+  }
+
+  const checkCreateStatus = () => {
+    if(createStatusCode <= 200 && createStatusCode >= 299){
         setFormData({comment:''})
-       toast.success("Comment created", {autoClose:200})
+        toast.success("Comment created", {autoClose:200})
+        setFormData({comment:''})
+        dispatchEvent(getCommentLstsAction(id))
      }
-  };
+  }
 
-
-  const user = auth.getCurrentUser()
-
+  
   useEffect(() => {
-        dispatch(getCommentLstsAction(id))
-  }, [dispatch]);
-
+      dispatch(getCommentLstsAction(id))
+      checkCreateStatus()
+    }, [dispatch, createStatusCode]);
+    
+    const user = auth.getCurrentUser()
 
   return  (
         <>
@@ -65,6 +71,7 @@ export const Comment = () => {
                         onChange={handleInputChange}
                         disabled = {!user? true: false}
                         name="comment"
+                        required
                         />
                     </div>
 
@@ -88,15 +95,15 @@ export const Comment = () => {
             </div>
             {/* Comments */}
             {
-                comments ?
+                comments?.data?.length ?
                comments?.data?.map((comment,index) => (
-                   <>
-                    <div key={comment.id} className="row justify-content-center px-4">
-                    <div className="col-md-10 col-lg-10">
+                   
+                    <div key={index +1} className="row justify-content-center px-4">
+                    <div  className="col-md-10 col-lg-10">
                         <div className="mb-4">
                             <div className="row ">
                                 <div className="col-1">
-                                <small class="badge rounded-pill p-1 bg-primary">
+                                <small className="badge rounded-pill p-1 bg-primary">
                                     {
                                         getInitial(comment.commenter.name)
                                     }
@@ -105,7 +112,7 @@ export const Comment = () => {
                                 </div>
                                
 
-                                <div className="col-4">
+                                <div className="col-md-4 col-sm-6 col-lg-4">
                                     <small>{comment.commenter.name}</small>
                                     <br />
                                     <small> 
@@ -117,9 +124,8 @@ export const Comment = () => {
                        <p>{getSubString( comment.comment, 200)}</p>
                         
                     </div>
+                     <hr />
                     </div>
-                    <hr key={index * comment.id + 'now'} />
-                   </>
                     
                   ))
                 : 

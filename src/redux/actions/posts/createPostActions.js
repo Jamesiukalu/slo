@@ -36,7 +36,7 @@ export const editPostAction = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
 
     try {
-      const response = await http.instance.patch(`posts/${payload.id}?_method=PUT`, payload.data,
+      const response = await http.instance.post(`posts/${payload.id}`, payload.data,
       {
         headers:{
           'Content-Type': 'multipart/form-data',

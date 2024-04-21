@@ -55,7 +55,9 @@ const [formData, setFormData] = useState({
     const updatePost = async (e) => {
       e.preventDefault();
       const data = new FormData();
-      data.append('media', selectedFile);
+      if(selectedFile){
+        data.append('media', selectedFile)
+      }
       data.append('title', formData.title)
       data.append('body', formData.body)
       data.append('category', formData.category)
@@ -63,9 +65,9 @@ const [formData, setFormData] = useState({
   };
 
   const successMessage = () => {
-    if(statusCode && statusCode ===201){
-      toast.success("Post updated", {autoClose:200})
-       navigation('/blogs')
+    if(statusCode && statusCode >= 200 && statusCode <= 299){
+      toast.success("Post updated", {autoClose:300})
+       window.location.href='/blogs'
     }
   }
   
@@ -84,6 +86,7 @@ const [formData, setFormData] = useState({
     }
     successMessage()
   }, [post, dispatch, id, statusCode]);
+  console.log(statusCode)
 
    return (
       <>

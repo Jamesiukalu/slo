@@ -1,7 +1,7 @@
 import React from "react"
-import logo from "../assets/Rectangle1.png"
 import { formatDateTime, getSubString } from "../services/helpers"
 import { BiTimer } from "react-icons/bi"
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 export const Trending  = ({props}) => {
   return(
@@ -24,7 +24,7 @@ export const Trending  = ({props}) => {
                                 <div className="card-body">
                                     <img src= {props?.data[0]?.media} alt="Logo" style={{width:"100%", height:"240px"}} />
                                 <div className="card-footer px-1 border-0">
-                                    <small className="btn btn-sm btn-secondary">
+                                    <small className="btn btn-sm bg-blue">
                                         {props?.data[0]?.category}
                                     </small>
                                     <article>
@@ -58,7 +58,7 @@ export const Trending  = ({props}) => {
                                 <div className="card-body pb-1">
                                             <img src= {props?.data[1]?.media} alt="Logo" style={{width:"70%", height:"100px"}} />
                                         <div className="card-footer px-1 border-0">
-                                            <small className="btn btn-sm btn-secondary">
+                                            <small className="btn btn-sm bg-blue">
                                                 {props?.data[1]?.category}
                                             </small>
                                             <article>
@@ -82,7 +82,7 @@ export const Trending  = ({props}) => {
                                     <div className="card-body">
                                                 <img src= {props?.data[2]?.media} alt="Logo" style={{width:"100%", height:"70px"}} />
                                             <div className="card-footer px-1 border-0">
-                                                <small className="btn btn-sm btn-secondary">
+                                                <small className="btn btn-sm bg-blue">
                                                     {props?.data[2]?.category}
                                                 </small>
                                                 <article>
@@ -116,7 +116,7 @@ export const Trending  = ({props}) => {
                                 <div className="card-body">
                                     <img src= {props?.data[3]?.media} alt="Logo" style={{width:"100%", height:'150px'}} />
                                 <div className="card-footer px-1 border-0">
-                                    <small className="btn btn-sm btn-secondary">
+                                    <small className="btn btn-sm bg-blue">
                                         {props?.data[3]?.category}
                                     </small>
                                     <article>
@@ -132,9 +132,6 @@ export const Trending  = ({props}) => {
                                         <small>
                                             {formatDateTime( props?.data[3]?.created_on)}
                                         </small>
-                                        <small>
-                                            <a href={`/post/details/${props?.data[3]?.id}`}>Read More </a>
-                                        </small>
                                     </div>
                                 </div>
                                 </div>
@@ -148,7 +145,7 @@ export const Trending  = ({props}) => {
                                     <div className="card-body">
                                         <img src= {props?.data[4]?.media} alt="Logo" style={{width:"100%", height:"150px"}} />
                                     <div className="card-footer px-1 border-0">
-                                        <small className="btn btn-sm btn-secondary">
+                                        <small className="btn btn-sm bg-blue">
                                             {props?.data[4]?.category}
                                         </small>
                                         <article>
@@ -164,9 +161,6 @@ export const Trending  = ({props}) => {
                                             <small>
                                             <BiTimer />   {formatDateTime( props?.data[4]?.created_on)}
                                             </small>
-                                            <small>
-                                                <a href={`/post/details/${props?.data[4]?.id}`}>Read More </a>
-                                            </small>
                                         </div>
                                     </div>
                                     </div>
@@ -181,7 +175,7 @@ export const Trending  = ({props}) => {
                                     <div className="card-body">
                                         <img src= {props?.data[5]?.media} alt="Logo" style={{width:"100%", height:'150px'}} />
                                     <div className="card-footer px-1 border-0">
-                                        <small className="btn btn-sm btn-secondary">
+                                        <small className="btn btn-sm bg-blue">
                                             {props?.data[5]?.category}
                                         </small>
                                         <article>
@@ -196,9 +190,6 @@ export const Trending  = ({props}) => {
                                         <div className="d-flex justify-content-between px-1">
                                             <small>
                                             <BiTimer />   {formatDateTime( props?.data[5]?.created_on)}
-                                            </small>
-                                            <small>
-                                                <a href={`/post/details/${props?.data[5]?.id}`}>Read More </a>
                                             </small>
                                         </div>
                                     </div>
@@ -219,9 +210,9 @@ export const Trending  = ({props}) => {
 
                     <div className="row justify-content-center mb-5">
                         <div className="col-2">
-                        <button className="btn btn-sm btn-secondary">
-                            Load More
-                        </button>
+                        <a href="/blogs/posts" className="px-2 border-blue active">
+                            Load More <FaLongArrowAltRight style={{fontSize:"10px"}} />
+                        </a>
                         </div>
                     </div>
                 }
@@ -258,7 +249,6 @@ export const Trending  = ({props}) => {
                                 </div>
                                 </div>
                             </div>
-                            {/* <img src= {props?.data[0]?.media} alt="Logo" /> */}
                         </div>
                         {
                             props?.data[6] &&
@@ -268,7 +258,7 @@ export const Trending  = ({props}) => {
                                     <div className="card-body">
                                         <img src= {props?.data[6]?.media} alt="Logo" style={{width:"100%", height:"150px"}} />
                                     <div className="card-footer px-1 border-0">
-                                        <small className="btn btn-sm btn-secondary">
+                                        <small className="btn btn-sm bg-blue">
                                             {props?.data[6]?.category}
                                         </small>
                                         <article>
@@ -302,9 +292,9 @@ export const Trending  = ({props}) => {
                     props?.data[6] &&
                     <div className="row justify-content-center mb-5">
                         <div className="col-2">
-                        <button className="btn btn-sm btn-secondary">
-                            Load More
-                        </button>
+                        <a href="/blogs/posts" className="btn btn-sm border-blue">
+                            Load More  <FaLongArrowAltRight style={{fontSize:"10px"}} />
+                        </a>
                         </div>
                     </div>
                 }

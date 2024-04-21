@@ -67,9 +67,9 @@ useEffect(() => {
                       <td>{data?.creator?.name}</td>
                       <td>{formatDateTime(data?.created_on)}</td>
                       <td>
-                        <a href = {`post/edit/${data?.id}`}  className="btn btn-sm btn-primary me-4">
+                        <Link to = {`/post/edit/${data?.id}`}  className="btn btn-sm btn-primary me-4">
                           Edit
-                        </a>
+                        </Link>
                         <button onClick={()=> deletePost(data?.id)} className="btn btn-sm btn-danger">
                           Delete
                         </button>
