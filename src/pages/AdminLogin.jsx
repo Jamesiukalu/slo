@@ -2,7 +2,7 @@ import React,{useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import logo from   "../assets/logo/image1.jpg"
 import {loginAction} from "../redux/actions/auth/loginAction";
-import { useNavigate, Navigate , useLocation} from 'react-router-dom';
+import { useNavigate, Navigate , useLocation, Link} from 'react-router-dom';
 import auth from "../services/auth/authService";
 import { ScreenLoader } from "./commons/ScreenLoader";
 
@@ -87,6 +87,7 @@ export const AdminLogin = () => {
                  name="email"
                  placeholder="name@example.com"
                  onChange={handleInputChange}
+                 required
                  />
                 </div>
 
@@ -99,11 +100,12 @@ export const AdminLogin = () => {
                  value={formData.password} 
                  className="form-control" id="passowrd" 
                  placeholder="*********"
+                 required
                  />
                 </div>
 
                 <div className="mb-3 text-end">
-                    <a href="/forgot-password">Forgot Password?</a>
+                    <Link to="/forgot-password">Forgot Password?</Link>
                 </div>
 
                 <div className="mb-3">
@@ -117,9 +119,9 @@ export const AdminLogin = () => {
                   <span className="d-inline-block me-2">
                       Don't have an account?
                   </span>
-                    <a href="/register" className=" text-end">
+                    <Link to="/register" className=" text-end">
                       Sign up
-                    </a>
+                    </Link>
                 </div>
                 
               </form>

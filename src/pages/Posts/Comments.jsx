@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createCommentAction } from "../../redux/actions/posts/commentAction";
 import { getCommentLstsAction } from "../../redux/actions/posts/commentListAction";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ScreenLoader } from "../commons/ScreenLoader";
 import { toast } from "react-toastify";
 import { formatDateTime, getInitial, getSubString } from "../../services/helpers";
@@ -78,9 +78,9 @@ export const Comment = () => {
                             <button className="btn btn-sm btn-primary">Comment</button>
                             </>
                             :
-                            <a href="/login" className="btn btn-default btn-sm">
+                            <Link to="/login" className="btn btn-default btn-sm">
                                 Please login to comment
-                            </a>
+                            </Link>
                         }
                     </div>
                 </form>
